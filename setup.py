@@ -34,11 +34,16 @@ with open("AUTHORS.md") as authors_file:
 with open("requirements.txt") as installation_requirements_file:
     requirements = installation_requirements_file.read().splitlines()
 
-if platform.machine() not in ('aarch64'):
+qt5_blacklist = [
+    ('Linux', 'aarch64'),
+    ('Darwin', 'arm64')
+]
+
+if (platform.system(), platform.machine()) not in qt5_blacklist:
     with open("requirements_qt5.txt") as qt_requirements_file:
         requirements.extend(qt_requirements_file.read().splitlines())
 else:
-    print("WARNING: Qt and PyQtGraph will need to be installed manually for aarch64", file=stderr)
+    print(f"WARNING: Qt and PyQtGraph will need to be installed manually for {platform.system()} / {platform.machine()}", file=stderr)
 
 with open("requirements_setup.txt") as setup_requirements_file:
     setup_requirements = setup_requirements_file.read().splitlines()
