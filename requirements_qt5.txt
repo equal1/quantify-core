@@ -1,1 +1,0 @@
-pyqt5>5.15.2  # 5.15.2 has known bug, #170, https://bugreports.qt.io/browse/PYSIDE-1473
